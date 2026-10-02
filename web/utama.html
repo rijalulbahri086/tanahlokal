@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TanahLokal - Peta & Analisis Lahan Fullscreen</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
+</head>
+<body class="h-full bg-stone-900 text-stone-800 antialiased overflow-hidden flex flex-col">
+
+    <!-- HEADER / NAVIGASI MELAYANG (FLOATING HEADER) -->
+    <header class="absolute top-4 left-4 right-4 z-40 max-w-[98%] mx-auto">
+        <div class="bg-white/90 backdrop-blur-md border border-stone-200/80 shadow-lg px-6 py-3.5 rounded-2xl flex items-center justify-between">
+            <!-- Logo & Nama Website -->
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-emerald-700 flex items-center justify-center text-white font-bold text-base shadow-sm">T</div>
+                <span class="font-bold text-lg tracking-tight text-stone-900">TanahLokal</span>
+            </div>
+
+            <!-- Navigasi Tengah -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-stone-600">
+                <a href="utama.html" class="text-emerald-700 font-semibold bg-emerald-50 px-3 py-1.5 rounded-lg">Peta & Analisis</a>
+                <a href="admin.html" class="hover:text-emerald-700 transition px-3 py-1.5">Panel Admin</a>
+            </nav>
+
+            <!-- Profil Pengguna & Dropdown Menu -->
+            <div class="relative">
+                <button id="profileMenuBtn" class="flex items-center gap-3 focus:outline-none group">
+                    <div class="text-right hidden sm:block">
+                        <span class="block text-xs font-bold text-stone-800">Budi Santoso</span>
+                        <span class="block text-[10px] text-stone-500">Perencana Proyek</span>
+                    </div>
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" alt="Foto Profil" class="w-10 h-10 rounded-full object-cover border-2 border-emerald-600 shadow-sm group-hover:border-emerald-700 transition">
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>
+                    </div>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div id="profileDropdown" class="hidden absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-stone-200 py-2 text-sm z-50">
+                    <div class="px-4 py-3 border-b border-stone-100">
+                        <span class="block text-xs text-stone-400">Masuk sebagai</span>
+                        <span class="block font-bold text-stone-800 truncate">budi.santoso@email.com</span>
+                    </div>
+                    <div class="py-1">
+                        <a href="#" class="flex items-center gap-2.5 px-4 py-2.5 text-stone-700 hover:bg-stone-50 transition">👤 Profil Saya</a>
+                        <a href="utama.html" class="flex items-center gap-2.5 px-4 py-2.5 text-stone-700 hover:bg-stone-50 transition">📊 Dashboard Klien</a>
+                    </div>
+                    <div class="border-t border-stone-100 py-1">
+                        <a href="index.html" class="flex items-center gap-2.5 px-4 py-2.5 text-rose-600 hover:bg-rose-50 transition font-medium">🚪 Keluar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- KONTEN UTAMA: FULLSCREEN PETA & PANEL FLOATING -->
+    <main class="relative flex-1 w-full h-full overflow-hidden">
+        
+        <!-- LATAR BELAKANG: PETA INTERAKTIF (FULLSCREEN) -->
+        <div class="absolute inset-0 z-0 bg-stone-200">
+            <!-- Gambar Peta Simulasi -->
+            <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=2000" alt="Peta Interaktif" class="w-full h-full object-cover opacity-90">
+            <div class="absolute inset-0 bg-emerald-950/15"></div>
+
+            <!-- Titik Pin Lokasi di Peta -->
+            <div class="absolute top-1/2 left-[58%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer">
+                <div class="bg-stone-900/90 backdrop-blur-md text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-xl mb-2 flex items-center gap-1.5 border border-stone-700">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    Jl. Ir. H. Juanda, Dago (Aktif)
+                </div>
+                <div class="w-6 h-6 bg-emerald-600 border-4 border-white rounded-full shadow-2xl flex items-center justify-center animate-bounce">
+                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL FLOATING KIRI: PENCARIAN & PILIHAN TUJUAN -->
+        <div class="absolute top-28 left-6 z-30 w-full max-w-sm space-y-4">
+            
+            <!-- Kotak Pencarian Jalan -->
+            <div class="bg-white/95 backdrop-blur-md p-5 rounded-2xl border border-stone-200/80 shadow-2xl space-y-3">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-stone-500">Pencarian Ruas Jalan</label>
+                <div class="relative">
+                    <input type="text" value="Jl. Ir. H. Juanda, Bandung" class="w-full pl-4 pr-10 py-3 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600 transition font-medium text-stone-800">
+                    <span class="absolute right-3 top-3.5 text-stone-400 text-sm">🔍</span>
+                </div>
+                <button class="w-full py-2.5 bg-emerald-700 text-white font-medium rounded-xl hover:bg-emerald-800 transition text-sm shadow-md">
+                    Cari Titik Peta
+                </button>
+            </div>
+
+            <!-- Pilihan Tujuan Pembangunan (List Dinamis) -->
+            <div class="bg-white/95 backdrop-blur-md p-5 rounded-2xl border border-stone-200/80 shadow-2xl space-y-3">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-stone-500">Pilih Tujuan Pembangunan</label>
+                <div class="space-y-2">
+                    <div class="p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50/70 flex items-center justify-between cursor-pointer shadow-sm">
+                        <span class="text-sm font-semibold text-stone-900">🏠 Rumah Tinggal 2 Lantai</span>
+                        <span class="w-4 h-4 rounded-full bg-emerald-600 flex items-center justify-center text-white text-[10px]">✓</span>
+                    </div>
+                    <div class="p-3 rounded-xl border border-stone-200 hover:border-stone-300 bg-white flex items-center justify-between cursor-pointer transition">
+                        <span class="text-sm font-medium text-stone-700">🏬 Ruko Komersial</span>
+                    </div>
+                    <div class="p-3 rounded-xl border border-stone-200 hover:border-stone-300 bg-white flex items-center justify-between cursor-pointer transition">
+                        <span class="text-sm font-medium text-stone-700">🏭 Gudang Logistik</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- PANEL FLOATING KANAN: HASIL ANALISIS LAHAN (MENUTUPI SEBAGIAN PETA TANPA MENUTUPI PIN LOKASI) -->
+        <div class="absolute top-28 right-6 z-30 w-full max-w-md bg-white/95 backdrop-blur-md p-6 rounded-2xl border border-stone-200/80 shadow-2xl space-y-5">
+            
+            <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                <div>
+                    <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md uppercase tracking-wide">Analisis Geografis Spesifik</span>
+                    <h3 class="text-base font-bold text-stone-900 mt-1">Jl. Ir. H. Juanda (Area Dago)</h3>
+                </div>
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">Valid</span>
+            </div>
+
+            <!-- Grid Ringkas Parameter Tanah -->
+            <div class="grid grid-cols-3 gap-2.5">
+                <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-center">
+                    <span class="block text-[10px] text-stone-500 uppercase">Struktur</span>
+                    <span class="text-xs font-bold text-stone-800 mt-0.5 block">Lempung Berpasir</span>
+                </div>
+                <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-center">
+                    <span class="block text-[10px] text-stone-500 uppercase">Kadar Air</span>
+                    <span class="text-xs font-bold text-stone-800 mt-0.5 block">Sedang (Stabil)</span>
+                </div>
+                <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-center">
+                    <span class="block text-[10px] text-stone-500 uppercase">Sirkulasi</span>
+                    <span class="text-xs font-bold text-stone-800 mt-0.5 block">Optimal (Utara)</span>
+                </div>
+            </div>
+
+            <!-- Rekomendasi Material & Teknik -->
+            <div class="space-y-2.5">
+                <h4 class="text-xs font-bold text-stone-900 uppercase tracking-wider">Rekomendasi Penanganan & Material</h4>
+                <ul class="space-y-2 text-xs text-stone-600 leading-relaxed">
+                    <li class="flex items-start gap-2">
+                        <span class="text-emerald-600 font-bold">•</span>
+                        <span><strong>Pondasi:</strong> Gunakan sumuran sedalam 1.5 - 2 meter untuk mengantisipasi kontur tanah berundak ringan.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-emerald-600 font-bold">•</span>
+                        <span><strong>Material Semen:</strong> Pilih semen tipe PCC untuk ketahanan optimal terhadap kelembaban udara sekitar.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-emerald-600 font-bold">•</span>
+                        <span><strong>Ventilasi:</strong> Terapkan bukaan silang (cross-ventilation) menghadap lembah.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <button class="w-full py-3 bg-stone-900 text-white font-semibold rounded-xl hover:bg-stone-800 transition text-xs shadow-md">
+                Unduh Laporan Lengkap (.PDF)
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- Script Sederhana untuk Dropdown Profil -->
+    <script>
+        const btn = document.getElementById('profileMenuBtn');
+        const dropdown = document.getElementById('profileDropdown');
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('hidden');
+        });
+
+        window.addEventListener('click', () => {
+            if (!dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+</html>
